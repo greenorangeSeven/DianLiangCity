@@ -1,0 +1,182 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <QuartzCore/QuartzCore.h>
+#import "micro.h"
+
+//添加的预编译
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
+#import "ASIHTTPRequestDelegate.h"
+#import "ASIHTTPRequestConfig.h"
+#import "Tool.h"
+#import "UserModel.h"
+#import "EGORefreshTableHeaderView.h"
+#import "EGOCache.h"
+#import "DataSingleton.h"
+#import "ImgRecord.h"
+#import "IconDownloader.h"
+#import "MBProgressHUD.h"
+#import "GCDiscreetNotificationView.h"
+#import "NdUncaughtExceptionHandler.h"
+#import "AFOSCClient.h"
+#import "AFHTTPRequestOperation.h"
+#import "AFXMLRequestOperation.h"
+#import "UserInfo.h"
+
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+
+#define IS_IOS7 ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0)
+
+#define loadNext20Tip @"点击加载更多 . . ."
+#define loadingTip @"正在加载 . . ."
+#define networkError @"网络无连接"
+#define noNetworkTip @"网络无连接"
+
+//所有的接口地址:
+#define api_base_url @"http://119.254.108.128:80/api/"
+#define api_key @"xUPfP3011dfd724elSXd2e7HU8BayYL6"
+
+
+//html头部
+#define HTML_Style @"<meta name='viewport' content='width=decice-width,uer-scalable=no'><style>#web_title {color: #f77300; margin-top: 15px; margin-bottom: 10px; font-weight:bold; text-align:center; font-size:20px;}#web_title img{vertical-align:middle;margin-right:6px;}#web_title a{color:#0D6DA8;}#web_summary {margin-top: 15px; margin-bottom: 10px; font-size:16px;}#web_summaryred {color: #c7252b;margin-top: 15px; margin-bottom: 10px; font-size:16px;}#web_column {background-color:#e5e5e5; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; font-size:16px; margin-right: -7px; margin-left: -7px;}#web_date {color: #000000; margin-top: 15px; margin-bottom: 10px; font-size:11px;text-align:center; white-space: nowrap;-o-text-overflow:ellipsis;text-overflow: ellipsis;}#web_outline {color: #707070; font-size: 12px;}#web_outline a{color:#0D6DA8;}#web_software{color:#808080;font-size:12px}#web_body img {max-width: 300px;}#web_body {font-size:14px;max-width:320px;line-height:24px; margin-top: 5px; } #web_body table{max-width:320px;}#web_body pre { font-size:9pt;font-family:Courier New,Arial;border:1px solid #ddd;border-left:5px solid #6CE26C;background:#f6f6f6;padding:5px;}</style>"
+#define HTML_Splitline @"<hr style='height:0.5px; background-color:#0D6DA8; margin-bottom:5px'/>"
+#define HTML_Bottom @"<div style='margin-bottom:60px'/>"
+
+#define AppVersion @"1.0"
+#define AppVersionCode @"1"
+
+#define noConnect @"noConnect"
+#define wifi @"wifi"
+#define netConnect @"netConnect"
+
+//发送短信接口
+#define api_sendSms @"sendSms"
+
+//修改会员头像接口
+#define api_upload_avatar @"upload_avatar"
+//修改昵称接口
+#define api_edit_nickname @"edit_nickname"
+//修改密码接口
+#define api_changePwd @"changePwd"
+
+//注册
+#define api_register @"register"
+
+//我的家庭成员列表
+#define api_my_familys @"my_familys"
+//家庭成员详情
+#define api_my_familys_info @"my_familys_info"
+//删除我的家庭成员
+#define api_remove_familys @"remove_familys"
+//添加家庭成员
+#define api_add_family_member @"add_family_member"
+
+//首页轮播广告接口:
+#define api_get_adv @"get_adv"
+
+//首页系统通知接口:
+#define api_get_system_notice_top @"get_system_notice_top"
+//系统通知接口:
+#define api_get_system_notice_list @"get_system_notice_list"
+//系统通知详情接口:
+#define api_get_system_notice_info @"get_system_notice_info"
+
+//使用帮组列表
+#define api_get_help_list @"get_help_list"
+//使用帮组详情
+#define api_get_help_info @"get_help_info"
+
+//我的社区接口:
+#define api_my_community_list @"my_community_list"
+
+//获取省市区接口:
+#define api_get_region @"get_region"
+
+//获取社区集合接口:
+#define api_community @"community"
+
+//登录接口
+#define api_login @"login"
+//社区验证接口
+#define api_valid @"valid"
+
+//社区简介接口
+#define api_get_community_info @"get_community_info"
+//社区风采,动态接口
+#define api_get_news_list @"get_news_list"
+//社区风采,动态详情接口
+#define api_get_news_info @"get_news_info"
+//社区服务热线接口
+#define api_get_services_hotline @"get_services_hotline"
+
+//物业通知列表接口
+#define api_get_notice_list @"get_notice_list"
+//政务通知列表接口
+#define api_get_zhengwutg_list @"get_zhengwutg_list"
+
+//物业通知详情接口
+#define api_get_notice_info @"get_notice_info"
+//政务通知详情接口
+#define api_get_zhengwutg_info @"get_zhengwutg_info"
+
+//账单类型列表接口
+#define api_get_bill_items @"get_bill_items"
+
+//我的账单列表接口
+#define api_get_my_bills @"get_my_bills"
+
+//账单信息详情接口
+#define api_get_bill_info @"get_bill_info"
+
+//我的报修列表接口
+#define api_my_baoxiu_list @"my_baoxiu_list"
+//报修详情
+#define api_get_baoxiu_info @"get_baoxiu_info"
+//报修接口
+#define api_add_baoxiu @"add_baoxiu"
+//报修评价
+#define api_comment_baoxiu @"comment_baoxiu"
+
+//论坛相关
+#define api_bbslist @"shequgj"
+#define api_replybbs @"reply_shequgj"
+#define api_add_shequgj_subject @"add_shequgj_subject"
+#define api_delbbs @"del_shequgj_subject"
+#define api_points @"points"
+
+//业主园地频道列表
+#define api_bbs_channel @"bbs_channel"
+//业主园地帖子列表
+#define api_bbs_bbs @"bbs"
+//业主园地发帖
+#define api_add_bbs_subject @"add_bbs_subject"
+//业主园地回帖
+#define api_reply_subject @"reply_subject"
+
+
+#define Notification_RefreshBBS @"Notification_RefreshBBS"
+#define Notification_ADDBBS @"Notification_ADDBBS"
+
+#ifdef DEBUG
+#define debugLog(...) NSLog(__VA_ARGS__)
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define debugLog(...)
+#define debugMethod()
+#endif
+
+#endif

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TDv-zP-WVK">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <scenes>
+        <!--物业通告-->
+        <scene sceneID="eaq-yk-oov">
+            <objects>
+                <viewController storyboardIdentifier="WuYeNoticeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8GA-wy-Ghq" customClass="WuYeNoticeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vNi-lR-6Ra">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="m5M-Ds-shN">
+                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9882352941176471" green="0.96862745098039216" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="物业通告" id="TX8-rx-2bp"/>
+                    <connections>
+                        <outlet property="tableView" destination="m5M-Ds-shN" id="5c3-gC-Xzc"/>
+                        <segue destination="NCd-e4-q9c" kind="push" identifier="WuYeNoticeViewDetail" id="Vg5-UC-gZI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EC2-iE-TxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="426" y="61"/>
+        </scene>
+        <!--通告详情-->
+        <scene sceneID="jcp-SD-Ptq">
+            <objects>
+                <viewController storyboardIdentifier="WuYeNoticeDetailViewController" id="NCd-e4-q9c" customClass="WuYeNoticeDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HY2-nb-Ym7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="Hsl-WU-TWh">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="通告详情" id="sn8-8w-OW0"/>
+                    <connections>
+                        <outlet property="webView" destination="Hsl-WU-TWh" id="Hcy-F0-pQu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PaA-SC-wxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="61"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bjr-k1-2qu">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="TDv-zP-WVK" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PSa-Ul-aht">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8GA-wy-Ghq" kind="relationship" relationship="rootViewController" id="Wx7-gb-qMS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1nW-4U-nWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="61"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
