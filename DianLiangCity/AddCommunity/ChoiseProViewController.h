@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface ChoiseProViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet UIButton *locationCityBtn;
+- (IBAction)locationCityAction:(id)sender;
 
 @end

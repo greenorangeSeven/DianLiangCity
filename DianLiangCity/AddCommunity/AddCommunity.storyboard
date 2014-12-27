@@ -13,6 +13,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="SXr-jP-anN">
+                            <rect key="frame" x="0.0" y="64" width="320" height="121"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   定位城市" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QaA-tm-WpS">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xom-5U-O7a">
+                                    <rect key="frame" x="13" y="46" width="289" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="locationCityAction:" destination="ELg-1d-LXX" eventType="touchUpInside" id="UHU-Fa-Nms"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   热门城市" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xkX-xh-PNi">
+                                    <rect key="frame" x="0.0" y="79" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.92549019610000005" green="0.46666666670000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <connections>
                             <outlet property="dataSource" destination="ELg-1d-LXX" id="l1p-n9-EZU"/>
                             <outlet property="delegate" destination="ELg-1d-LXX" id="1Vv-Tj-r2o"/>
@@ -20,8 +55,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="选择社区" id="1k3-sm-0GA"/>
                     <connections>
+                        <outlet property="headerView" destination="SXr-jP-anN" id="Nzf-QG-nBz"/>
+                        <outlet property="locationCityBtn" destination="Xom-5U-O7a" id="zJX-hm-1hF"/>
                         <outlet property="tableView" destination="ePt-j6-NfE" id="xtD-mD-Mff"/>
                         <segue destination="mJL-vi-zy2" kind="push" identifier="ChoiseCityView" id="W7t-0a-8CY"/>
+                        <segue destination="UJR-hk-edN" kind="push" identifier="ChoiseAreaViewController" id="gVS-aH-6ZZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZX-HD-21j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -641,4 +679,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="gVS-aH-6ZZ"/>
+    </inferredMetricsTieBreakers>
 </document>
