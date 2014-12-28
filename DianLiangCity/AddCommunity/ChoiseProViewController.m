@@ -166,19 +166,19 @@
                                            NSDictionary *locationDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                            NSString *provinceStr = [[[locationDic objectForKey:@"result"] objectForKey:@"addressComponent"] objectForKey:@"province"];
                                            NSString *cityStr = [[[locationDic objectForKey:@"result"] objectForKey:@"addressComponent"] objectForKey:@"city"];
-                                           NSString *provinceTmpStr = [provinceStr substringWithRange:NSMakeRange(0, [provinceStr length] -1)];
-                                           NSString *cityTmpStr = [cityStr substringWithRange:NSMakeRange(0, [provinceStr length] -1)];
+//                                           NSString *provinceTmpStr = [provinceStr substringWithRange:NSMakeRange(0, [provinceStr length] -1)];
+//                                           NSString *cityTmpStr = [cityStr substringWithRange:NSMakeRange(0, [provinceStr length] -1)];
                                            [self.locationCityBtn setTitle:[NSString stringWithFormat:@"%@->%@", provinceStr, cityStr] forState:UIControlStateNormal];
                                            NSArray *city2Array = [[NSArray alloc] init];
                                            
                                            //遍历省获得定位省的城市数据
                                            for (ProvinceModel *pro in cityArray) {
-                                               if ([pro.name isEqualToString:provinceTmpStr]) {
+                                               if ([provinceStr hasPrefix:pro.name]) {
                                                    selectProvinceModel = pro;
                                                    city2Array = pro.cityArray;
                                                    //遍历市获得定位市的区数据
                                                    for (CityModel *city in city2Array) {
-                                                       if ([city.name isEqualToString:cityTmpStr]) {
+                                                       if ([cityStr hasPrefix:city.name]) {
                                                            selectCityModel = city;
                                                            break;
                                                        }

@@ -27,6 +27,14 @@
     self.communityNameLabel.text = self.selectComm.title;
 }
 
+- (void)backAction
+{
+    if(self.navigationController)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)verifyAction:(id)sender
 {
     [self.view resignFirstResponder];

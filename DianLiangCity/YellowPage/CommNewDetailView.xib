@@ -7,8 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommNewDetailView">
             <connections>
-                <outlet property="imgScroller" destination="Hao-aH-4bn" id="dpR-ts-Jid"/>
-                <outlet property="scrollView" destination="GgE-2l-8he" id="G9X-wz-lrP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="C83-4P-kqU" id="9gd-Dc-t7j"/>
             </connections>
@@ -18,23 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GgE-2l-8he">
-                    <rect key="frame" x="-8" y="0.0" width="327" height="568"/>
+                <webView contentMode="scaleToFill" id="C83-4P-kqU">
+                    <rect key="frame" x="0.0" y="0.0" width="319" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Hao-aH-4bn">
-                            <rect key="frame" x="7" y="0.0" width="320" height="173"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <webView contentMode="scaleToFill" id="C83-4P-kqU">
-                            <rect key="frame" x="8" y="186" width="319" height="382"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </webView>
-                    </subviews>
                     <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                </scrollView>
+                </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="225" y="155"/>

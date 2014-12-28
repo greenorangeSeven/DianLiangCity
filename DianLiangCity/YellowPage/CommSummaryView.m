@@ -148,6 +148,18 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    bannerView.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    bannerView.delegate = nil;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

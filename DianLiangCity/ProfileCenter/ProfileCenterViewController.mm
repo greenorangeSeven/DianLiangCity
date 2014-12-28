@@ -56,6 +56,7 @@
         UserInfo *info = [[UserModel Instance] getUserInfo];
         NSString *name = [NSString stringWithFormat:@"mycommunity%i",info.id];
         [[EGOCache globalCache] removeCacheForKey:name];
+        [[EGOCache globalCache] removeCacheForKey:@"mycommunity-1"];
         [[UserModel Instance] logoutUser];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"logined" object:nil];
         [self.navigationController popToRootViewControllerAnimated:YES];

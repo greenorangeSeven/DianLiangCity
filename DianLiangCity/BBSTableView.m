@@ -340,6 +340,10 @@
         else
         {
             int size = bbs.thumb.count / 3;
+            if(bbs.thumb.count % 3 == 0)
+            {
+                size -= 1;
+            }
             if(size < 1)
                 size = 0;
             
@@ -388,6 +392,10 @@
             {
                 cell.imgCollectionView.hidden = NO;
                 double size = bbs.thumb.count / 3;
+                if(bbs.thumb.count % 3 == 0)
+                {
+                    size -= 1;
+                }
                 if(size < 1)
                     size = 0;
                 int thumbHeight = 62;

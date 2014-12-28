@@ -149,6 +149,10 @@
     }
     else
     {
+        CGRect frame = self.weixiu_cailiao_label.frame;
+        frame.size.width = self.view.frame.size.width;
+        self.weixiu_cailiao_label.frame = frame;
+        self.weixiu_cailiao_label.textAlignment = UITextAlignmentCenter;
         self.weixiu_cailiao_label.text = @"无材料";
     }
     

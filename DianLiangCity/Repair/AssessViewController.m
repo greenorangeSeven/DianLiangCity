@@ -35,25 +35,25 @@
     //星级评价
     AMRatingControl *totalControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     totalControl.tag = 1;
-    [totalControl setRating:1];
+    [totalControl setRating:5];
     [totalControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     totalRateValue = @"1";
     
     AMRatingControl *serviceControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     serviceControl.tag = 2;
-    [serviceControl setRating:1];
+    [serviceControl setRating:5];
     [serviceControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     serviceRateValue = @"1";
     
     AMRatingControl *qualityControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     qualityControl.tag = 3;
-    [qualityControl setRating:1];
+    [qualityControl setRating:5];
     [qualityControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     qualityRateValue = @"1";
     
     AMRatingControl *speekControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     speekControl.tag = 4;
-    [speekControl setRating:1];
+    [speekControl setRating:5];
     [speekControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     speekRateValue = @"1";
     

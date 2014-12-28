@@ -430,6 +430,13 @@
     //如果是点击的删除按钮则删除社区
     if(buttonIndex == 1)
     {
+        Community *comm = [commDatas objectAtIndex:alertView.tag];
+        if(comm.customer_pro == 1)
+        {
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示:" message:@"户主不能被删除！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alerView show];
+            return;
+        }
         [commDatas removeObjectAtIndex:alertView.tag];
         EGOCache *cache = [EGOCache globalCache];
         NSMutableArray *comms = [[NSMutableArray alloc] initWithArray:commDatas];
@@ -528,6 +535,18 @@
         [controller setValue:currentAdv forKey:@"adv"];
         [controller setValue:currentSysInfo forKey:@"sysInfo"];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    bannerView.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    bannerView.delegate = nil;
 }
 
 - (void)dealloc
