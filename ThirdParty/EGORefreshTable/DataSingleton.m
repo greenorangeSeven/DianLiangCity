@@ -30,8 +30,8 @@
     cell.lbl.font = [UIFont boldSystemFontOfSize:16.0];
     cell.lbl.text = isLoadOver ? loadOverString : loadingString;
     if (isLoading) {
-        cell.loading.hidden = NO;
-        [cell.loading startAnimating];
+        cell.loading.hidden = YES;
+        [cell.loading stopAnimating];
     }
     else
     {

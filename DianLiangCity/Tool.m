@@ -906,6 +906,9 @@
     //得到帖子集合
     NSMutableArray *list;
     id listJSON = [scopyJsondDic objectForKey:@"list"];
+    if (listJSON == [NSNull null]) {
+        return nil;
+    }
     list = [RMMapper mutableArrayOfClass:[BBSModel class]
                              fromArrayOfDictionary:listJSON];
     ownerScope.list = list;

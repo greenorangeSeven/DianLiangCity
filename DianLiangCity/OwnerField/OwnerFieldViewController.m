@@ -242,6 +242,7 @@
         NSString *url = [NSString stringWithString:tempUrl];
         [[AFOSCClient sharedClient] getPath:url parameters:Nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             @try {
+                [self clear];
                 ownerScope = [Tool readJsonStrToOwnerScopes:operation.responseString];
                 bbsArray = ownerScope.list;
                 int count = [bbsArray count];
