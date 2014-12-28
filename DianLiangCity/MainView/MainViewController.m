@@ -202,7 +202,7 @@
             [self loadMyCommByBack];
             return;
         }
-        userModel.validateComms = commDatas;
+        userModel.validateComms = commDatas ;
     }
     if(!commDatas)
         commDatas = [[NSMutableArray alloc] init];

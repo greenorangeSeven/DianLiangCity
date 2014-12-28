@@ -17,9 +17,14 @@
 
 
 /**
- * 维修描述
+ * 维修标题
  */
 @property (nonatomic, copy) NSString *summary;
+
+/**
+ * 维修描述
+ */
+@property (nonatomic, copy) NSString *remark;
 
 /**
  * 维修状态

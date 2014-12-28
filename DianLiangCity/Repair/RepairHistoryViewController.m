@@ -88,7 +88,7 @@
 - (void)initBaoXiuInfo
 {
     self.order_no_label.text = [NSString stringWithFormat:@"【%@】",baoxiuInfo.order_no];
-    self.summary_label.text = baoxiuInfo.summary;
+    self.summary_label.text = baoxiuInfo.remark;
     //判断当前报修的程度
     if(baoxiuInfo.status >= 1)
     {

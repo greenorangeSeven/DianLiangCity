@@ -14,6 +14,8 @@
     int cid;
     NSString *relation;
     NSString *commTitle;
+    
+    NSMutableArray *validateComms;
 }
 
 @property (nonatomic) NSArray *relationArray;
@@ -47,6 +49,11 @@
     self.comPicker.dataSource = self;
     self.commTextField.inputView = self.comPicker;
     self.comPicker.tag = 112;
+    
+    self.relationTextField.delegate = self;
+    self.commTextField.delegate = self;
+    
+    validateComms = userModel.validateComms;
 }
 
 
@@ -89,7 +96,7 @@
         [request setPostValue:[NSString stringWithFormat:@"%i",cid] forKey:@"cid"];
         [request setPostValue:[NSString stringWithFormat:@"%i",[userModel getUserInfo].id] forKey:@"userid"];
         [request setPostValue:[NSString stringWithFormat:@"%i",[Tool getRandomNumber:100000 to:999999]] forKey:@"invite_code"];
-
+        
         request.delegate = self;
         [request setDidFailSelector:@selector(requestFailed:)];
         [request setDidFinishSelector:@selector(requestOK:)];
@@ -105,7 +112,7 @@
     {
         [request.hud hide:NO];
     }
-   [Tool showCustomHUD:@"成员添加失败,请重试" andView:self.view andImage:nil andAfterDelay:1.5];
+    [Tool showCustomHUD:@"成员添加失败,请重试" andView:self.view andImage:nil andAfterDelay:1.5];
 }
 
 - (void)requestOK:(ASIHTTPRequest *)request
@@ -137,6 +144,26 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if (textField == self.relationTextField) {
+        if (relation == nil || [relation length] == 0) {
+            relation = [self.relationArray objectAtIndex:0];
+            self.relationTextField.text = relation;
+        }
+    }
+    if (textField == self.commTextField) {
+        if (commTitle == nil || [commTitle length] == 0) {
+            if([validateComms count] > 0)
+            {
+                Community *comm = [validateComms objectAtIndex:0];
+                cid = comm.id;
+                commTitle = comm.title;
+                self.commTextField.text = commTitle;
+            }
+        }
+        
+    }
+    
+    
     if (textField.inputAccessoryView == nil)
     {
         textField.inputAccessoryView = [self keyboardToolBar:textField.tag];
@@ -162,32 +189,32 @@
 
 - (void)doneClicked:(UITextField *)sender
 {
-    if(relation.length > 0)
-    {
-        self.relationTextField.text = relation;
-    }
-    else
-    {
-        if([self.relationTextField isFirstResponder])
-        {
-            relation = [self.relationArray objectAtIndex:0];
-            self.relationTextField.text = relation;
-        }
-    }
-    if(commTitle.length > 0)
-    {
-        self.commTextField.text = commTitle;
-    }
-    else
-    {
-        if([self.commTextField isFirstResponder])
-        {
-            Community *comm = [self.commArray objectAtIndex:0];
-            cid = comm.id;
-            commTitle = comm.title;
-             self.commTextField.text = commTitle;
-        }
-    }
+    //    if(relation.length > 0)
+    //    {
+    //        self.relationTextField.text = relation;
+    //    }
+    //    else
+    //    {
+    //        if([self.relationTextField isFirstResponder])
+    //        {
+    //            relation = [self.relationArray objectAtIndex:0];
+    //            self.relationTextField.text = relation;
+    //        }
+    //    }
+    //    if(commTitle.length > 0)
+    //    {
+    //        self.commTextField.text = commTitle;
+    //    }
+    //    else
+    //    {
+    //        if([self.commTextField isFirstResponder])
+    //        {
+    //            Community *comm = [self.commArray objectAtIndex:0];
+    //            cid = comm.id;
+    //            commTitle = comm.title;
+    //             self.commTextField.text = commTitle;
+    //        }
+    //    }
     
     [self.relationTextField resignFirstResponder];
     [self.commTextField resignFirstResponder];
@@ -213,8 +240,9 @@
     }
     else if (pickerView == self.comPicker)
     {
-        
-        return [userModel.validateComms count];
+        if ([validateComms count] > 0) {
+            return [validateComms count] - 1;
+        }
     }
     return 0;
 }
@@ -229,7 +257,7 @@
     }
     else if (pickerView == self.comPicker)
     {
-        Community *comm = [userModel.validateComms objectAtIndex:row];
+        Community *comm = [validateComms objectAtIndex:row];
         return comm.title;
     }
     
@@ -241,12 +269,14 @@
     if (thePickerView == self.relationPicker)
     {
         relation = [self.relationArray objectAtIndex:row];
+        self.relationTextField.text = relation;
     }
     else if (thePickerView == self.comPicker)
     {
-        Community *comm = [userModel.validateComms objectAtIndex:row];
+        Community *comm = [validateComms objectAtIndex:row];
         cid = comm.id;
         commTitle = comm.title;
+        self.commTextField.text = commTitle;
     }
 }
 

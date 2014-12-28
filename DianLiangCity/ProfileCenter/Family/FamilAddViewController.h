@@ -8,7 +8,7 @@
 
 #import "TTBaseViewController.h"
 
-@interface FamilAddViewController : TTBaseViewController<UIAlertViewDelegate>
+@interface FamilAddViewController : TTBaseViewController<UIAlertViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
