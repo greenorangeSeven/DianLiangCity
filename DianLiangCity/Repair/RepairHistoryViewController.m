@@ -18,6 +18,7 @@
 {
     BaoXiuInfo *baoxiuInfo;
     NSString *rateValue;
+    BOOL isPingjia;
 }
 @end
 
@@ -32,12 +33,21 @@
     self.progress_tableView.dataSource = self;
     self.progress_tableView.delegate = self;
     [self.weixiu_img_collection registerClass:[RepairThumbCell class] forCellWithReuseIdentifier:@"RepairThumbCell"];
+    [self loadRepairDetail];
+    isPingjia = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:@"Notification_RefreshRepair" object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)refreshed:(NSNotification *)notification
 {
+    isPingjia = YES;
     [self loadRepairDetail];
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [self loadRepairDetail];
+//}
 
 - (void)backAction:(id)sender
 {
@@ -93,6 +103,7 @@
     if(baoxiuInfo.status >= 1)
     {
         [self.baoxiulabel setTextColor:[UIColor colorWithRed:0.97 green:0.45 blue:0 alpha:1]];
+        self.toCommBtn.hidden = YES;
         [self.baoxiuImg setImage:[UIImage imageNamed:@"repair_dot_h"]];
     }
     if(baoxiuInfo.status >= 2)
@@ -100,18 +111,21 @@
         [self.paigonglabel setTextColor:[UIColor colorWithRed:0.97 green:0.45 blue:0 alpha:1]];
         [self.paigongImg setImage:[UIImage imageNamed:@"repair_dot_h"]];
         [self.paigongProImg setImage:[UIImage imageNamed:@"repair_line_h"]];
+        self.toCommBtn.hidden = YES;
     }
     if(baoxiuInfo.status >= 3)
     {
         [self.weixiulabel setTextColor:[UIColor colorWithRed:0.97 green:0.45 blue:0 alpha:1]];
         [self.weixiuImg setImage:[UIImage imageNamed:@"repair_dot_h"]];
         [self.weixiuProImg setImage:[UIImage imageNamed:@"repair_line_h"]];
+        self.toCommBtn.hidden = NO;
     }
     if(baoxiuInfo.status >= 4)
     {
         [self.pingjialabel setTextColor:[UIColor colorWithRed:0.97 green:0.45 blue:0 alpha:1]];
         [self.pingjiaImg setImage:[UIImage imageNamed:@"repair_dot_h"]];
         [self.pingjiaProImg setImage:[UIImage imageNamed:@"repair_line_h"]];
+        self.toCommBtn.hidden = YES;
     }
     
     //判断是否存在报修图片
@@ -127,18 +141,21 @@
         self.progress_view.frame = CGRectMake(self.progress_view.frame.origin.x, self.summary_view.frame.origin.y + self.summary_view.frame.size.height + 6, self.progress_view.frame.size.width, self.progress_view.frame.size.height);
     }
     
-    if(baoxiuInfo.baoxiu_process && baoxiuInfo.baoxiu_process.count > 0)
-    {
-        int height = (baoxiuInfo.baoxiu_process.count - 1) * 81;
-        self.progress_view.frame = CGRectMake(self.progress_view.frame.origin.x, self.progress_view.frame.origin.y, self.progress_view.frame.size.width, self.progress_view.frame.size.height + height);
-        self.progress_tableView.frame = CGRectMake(self.progress_tableView.frame.origin.x, self.progress_tableView.frame.origin.y, self.progress_tableView.frame.size.width, self.progress_tableView.frame.size.height + height);
-        [self.progress_tableView reloadData];
-        self.progress_none_label.hidden = YES;
+    if (!isPingjia) {
+        if(baoxiuInfo.baoxiu_process && baoxiuInfo.baoxiu_process.count > 0)
+        {
+            int height = (baoxiuInfo.baoxiu_process.count - 1) * 81;
+            self.progress_view.frame = CGRectMake(self.progress_view.frame.origin.x, self.progress_view.frame.origin.y, self.progress_view.frame.size.width, self.progress_view.frame.size.height + height);
+            self.progress_tableView.frame = CGRectMake(self.progress_tableView.frame.origin.x, self.progress_tableView.frame.origin.y, self.progress_tableView.frame.size.width, self.progress_tableView.frame.size.height + height);
+            [self.progress_tableView reloadData];
+            self.progress_none_label.hidden = YES;
+        }
+        else
+        {
+            self.progress_none_label.hidden = NO;
+        }
     }
-    else
-    {
-        self.progress_none_label.hidden = NO;
-    }
+    
     
     self.cailiao_view.frame = CGRectMake(self.cailiao_view.frame.origin.x, self.progress_view.frame.origin.y + self.progress_view.frame.size.height + 6, self.cailiao_view.frame.size.width, self.cailiao_view.frame.size.height);
     if(baoxiuInfo.weixiu_cailiao.length > 0)

@@ -71,4 +71,8 @@
  */
 @property(nonatomic) NSArray *areaList;
 
+@property(nonatomic,copy) NSString *area;
+@property(nonatomic,copy) NSString *build;
+@property(nonatomic,copy) NSString *units;
+
 @end

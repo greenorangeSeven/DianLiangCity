@@ -15,6 +15,7 @@
 #import "SystemInformCell.h"
 #import "LoginViewController.h"
 #import "ProfileCenterViewController.h"
+#import "XGPush.h"
 
 @interface MainViewController () <SGFocusImageFrameDelegate, UIActionSheetDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
@@ -242,6 +243,26 @@
                                                userModel.validateComms = commDatas;
                                                NSString *name = [NSString stringWithFormat:@"mycommunity%i",userInfo.id];
                                                [cache setObject:commDatas forKey:name withTimeoutInterval:3600 * 24 * 30];
+                                               
+                                               for (Community *comm in commDatas) {
+                                                   if (comm.id >0) {
+                                                       [XGPush setTag:[NSString stringWithFormat:@"%d", comm.id]];
+                                                       if ([comm.area length] > 0) {
+                                                           [XGPush setTag:[NSString stringWithFormat:@"%d_%@", comm.id, comm.area]];
+                                                           if ([comm.build length] > 0) {
+                                                               [XGPush setTag:[NSString stringWithFormat:@"%d_%@_%@", comm.id, comm.area, comm.build]];
+                                                               if ([comm.units length] > 0) {
+                                                                   [XGPush setTag:[NSString stringWithFormat:@"%d_%@_%@_%@", comm.id, comm.area, comm.build, comm.units]];
+                                                                   if ([comm.house_number length] > 0) {
+                                                                       [XGPush setTag:[NSString stringWithFormat:@"%d_%@_%@_%@_%@", comm.id, comm.area, comm.build, comm.units, comm.house_number]];
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                                   
+                                               }
+                                               
                                            }
                                            [commDatas addObjectsFromArray:(NSArray *)[cache objectForKey:@"mycommunity-1"]];
                                            if(!commDatas)

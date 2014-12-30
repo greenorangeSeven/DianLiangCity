@@ -16,8 +16,11 @@
 //社区介绍视图
 @property (strong, nonatomic) CommSummaryView *commSummaryView;
 
-//社区风采,动态视图
+//社区风采
 @property (strong, nonatomic) CommNewView *commNewView;
+
+//动态视图
+@property (strong, nonatomic) CommNewView *commNewView2;
 
 //社区热线服务视图
 @property (strong, nonatomic) CommHotlineView *commHotlineView;

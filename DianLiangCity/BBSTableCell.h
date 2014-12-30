@@ -11,6 +11,11 @@
 #import "MWPhotoBrowser.h"
 
 @interface BBSTableCell : UITableViewCell<UICollectionViewDataSource,UICollectionViewDelegate,MWPhotoBrowserDelegate>
+{
+    NSMutableArray *_photos;
+}
+
+@property (nonatomic, retain) NSMutableArray *photos;
 
 @property (retain, nonatomic) NSArray *imgArray;
 

@@ -384,6 +384,7 @@
                 }
             }
             BBSModel *bbs = [bbsArray objectAtIndex:[indexPath row]];
+            cell.navigationController = self.navigationController;
             //内容
             cell.contentLb.text = bbs.content;
             CGRect contentLb = cell.contentLb.frame;
@@ -405,7 +406,7 @@
                 cell.timeView.frame = CGRectMake(cell.timeView.frame .origin.x, cell.imgCollectionView.frame.origin.y + cell.imgCollectionView.frame.size.height + 2, cell.timeView.frame.size.width, cell.timeView.frame.size.height);
                 
                 cell.imgArray = bbs.thumb;
-                cell.navigationController = self.navigationController;
+                
                 [cell.imgCollectionView reloadData];
             }
             else
@@ -590,17 +591,30 @@
     {
         [Tool showCustomHUD:@"点赞成功" andView:self.view andImage:nil andAfterDelay:1.2];
         showBBSBtn.bbs.isShowMenu = NO;
-        NSMutableArray *points = [NSMutableArray arrayWithArray:showBBSBtn.bbs.points_list];
+//        NSMutableArray *points = [NSMutableArray arrayWithArray:showBBSBtn.bbs.points_list];
+        
+        
+        BBSModel *bbs = [bbsArray objectAtIndex:[showBBSBtn.indexPath row]];
+        NSMutableArray *points = [NSMutableArray arrayWithArray:bbs.points_list];
+        
         BBSPoint *point = [[BBSPoint alloc] init];
         UserInfo *userInfo = [[UserModel Instance] getUserInfo];
         if(userInfo.nickname)
         {
             point.nickname = userInfo.nickname;
             [points addObject:point];
-            showBBSBtn.bbs.points_list = points;
+            bbs.points_list = points;
+            if (!bbs.point_str) {
+                bbs.point_str = [[NSMutableString alloc] init];
+                [bbs.point_str appendString:point.nickname];
+            }
+            else
+            {
+                [bbs.point_str appendString:[NSString stringWithFormat:@",%@", point.nickname]];
+            }
         }
         
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:showBBSBtn.indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadData];
         showBBSBtn = nil;
     }
     else if(status.intValue == 2)

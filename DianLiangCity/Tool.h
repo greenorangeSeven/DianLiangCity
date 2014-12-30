@@ -11,7 +11,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <CommonCrypto/CommonCryptor.h>
-#import <ShareSDK/ShareSDK.h>
 #import "RMMapper.h"
 #import "MBProgressHUD.h"
 #import "Advertisement.h"

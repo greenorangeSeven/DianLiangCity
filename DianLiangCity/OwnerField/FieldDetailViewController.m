@@ -202,23 +202,35 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    if (self.imgArray && [self.imgArray count] > 0)
-    //    {
-    //        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    //        browser.displayActionButton = YES;
-    //        self.navigationController.navigationBar.hidden = NO;
-    //        [self.navigationController pushViewController:browser animated:YES];
-    //    }
+    if ([self.photos count] == 0)
+    {
+        NSMutableArray *photos = [[NSMutableArray alloc] init];
+        for (NSString *d in self.imgArray ) {
+            MWPhoto * photo = [MWPhoto photoWithURL:[NSURL URLWithString:d]];
+            [photos addObject:photo];
+        }
+        self.photos = photos;
+    }
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = YES;
+    browser.displayNavArrows = NO;//左右分页切换,默认否
+    browser.displaySelectionButtons = NO;//是否显示选择按钮在图片上,默认否
+    browser.alwaysShowControls = YES;//控制条件控件 是否显示,默认否
+    browser.zoomPhotosToFill = NO;//是否全屏,默认是
+    //    browser.wantsFullScreenLayout = YES;//是否全屏
+    [browser setCurrentPhotoIndex:[indexPath row]];
+    self.navigationController.navigationBar.hidden = NO;
+    [self.navigationController pushViewController:browser animated:YES];
 }
 
 //MWPhotoBrowserDelegate委托事件
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.imgArray.count;
+    return _photos.count;
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < self.imgArray.count)
-        return [self.imgArray objectAtIndex:index];
+    if (index < _photos.count)
+        return [_photos objectAtIndex:index];
     return nil;
 }
 

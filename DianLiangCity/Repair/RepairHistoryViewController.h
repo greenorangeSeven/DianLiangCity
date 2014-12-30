@@ -46,6 +46,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *weixiulabel;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *toCommBtn;
 
 - (IBAction)toComm:(UIButton *)sender;
 

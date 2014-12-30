@@ -35,25 +35,25 @@
     //星级评价
     AMRatingControl *totalControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     totalControl.tag = 1;
-    [totalControl setRating:5];
+    [totalControl setRating:0];
     [totalControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     totalRateValue = @"1";
     
     AMRatingControl *serviceControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     serviceControl.tag = 2;
-    [serviceControl setRating:5];
+    [serviceControl setRating:0];
     [serviceControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     serviceRateValue = @"1";
     
     AMRatingControl *qualityControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     qualityControl.tag = 3;
-    [qualityControl setRating:5];
+    [qualityControl setRating:0];
     [qualityControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     qualityRateValue = @"1";
     
     AMRatingControl *speekControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(0, 0) emptyImage:dot solidImage:star andMaxRating:5];
     speekControl.tag = 4;
-    [speekControl setRating:5];
+    [speekControl setRating:0];
     [speekControl addTarget:self action:@selector(updateEndRating:) forControlEvents:UIControlEventEditingDidEnd];
     speekRateValue = @"1";
     
@@ -147,6 +147,7 @@
     if(status.intValue == 1)
     {
         [Tool showCustomHUD:@"评价成功" andView:self.view andImage:nil andAfterDelay:1.2];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_RefreshRepair" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
