@@ -260,7 +260,6 @@
                                                            }
                                                        }
                                                    }
-                                                   
                                                }
                                                
                                            }
@@ -459,6 +458,23 @@
             return;
         }
         [commDatas removeObjectAtIndex:alertView.tag];
+        
+        if (comm.id >0) {
+            [XGPush delTag:[NSString stringWithFormat:@"%d", comm.id]];
+            if ([comm.area length] > 0) {
+                [XGPush delTag:[NSString stringWithFormat:@"%d_%@", comm.id, comm.area]];
+                if ([comm.build length] > 0) {
+                    [XGPush delTag:[NSString stringWithFormat:@"%d_%@_%@", comm.id, comm.area, comm.build]];
+                    if ([comm.units length] > 0) {
+                        [XGPush delTag:[NSString stringWithFormat:@"%d_%@_%@_%@", comm.id, comm.area, comm.build, comm.units]];
+                        if ([comm.house_number length] > 0) {
+                            [XGPush delTag:[NSString stringWithFormat:@"%d_%@_%@_%@_%@", comm.id, comm.area, comm.build, comm.units, comm.house_number]];
+                        }
+                    }
+                }
+            }
+        }
+        
         EGOCache *cache = [EGOCache globalCache];
         NSMutableArray *comms = [[NSMutableArray alloc] initWithArray:commDatas];
         [comms removeObjectsAtIndexes:[[NSIndexSet alloc] initWithIndex:comms.count - 1]];

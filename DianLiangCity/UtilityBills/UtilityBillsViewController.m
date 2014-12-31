@@ -17,6 +17,8 @@
     MyBill *myBill;
     NSMutableArray *billTypes;
     NSMutableArray *allBills;
+    
+    int selectRow;
 }
 
 @property (strong, nonatomic) DAContextMenuCell *cellDisplayingMenuOptions;
@@ -243,6 +245,7 @@
     }
     else if(tableView == self.billsListTableView)
     {
+        selectRow = [indexPath row];
         [self performSegueWithIdentifier:@"BillsDetialView" sender:self];
     }
 }
@@ -401,9 +404,10 @@
 {
     if([segue.identifier isEqualToString:@"BillsDetialView"])
     {
-        Bill *bill = [allBills objectAtIndex:[self.billsListTableView indexPathForSelectedRow].row];
+//        NSIndexPath *indexPath = [self.billsListTableView indexPathForSelectedRow];
+        Bill *bill = [allBills objectAtIndex:selectRow];
         UIViewController *controller = [segue destinationViewController];
-        [controller setValue:bill forKey:@"bill"];
+        [controller setValue:[NSString stringWithFormat:@"%d", bill.id] forKey:@"billId"];
     }
 }
 @end

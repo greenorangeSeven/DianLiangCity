@@ -338,6 +338,10 @@
 		141DE7DE19D908C8000B15B0 /* TTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 141DE7C519D908C8000B15B0 /* TTBaseViewController.m */; };
 		141DE7E419D909C2000B15B0 /* BackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 141DE7E119D909C2000B15B0 /* BackButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		141DE7E519D909C2000B15B0 /* TTLicenseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 141DE7E319D909C2000B15B0 /* TTLicenseService.m */; };
+		1475F8CD1A543E4C00F99232 /* SysInfoDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475F8CB1A543E4C00F99232 /* SysInfoDetailView.m */; };
+		1475F8CE1A543E4C00F99232 /* SysInfoDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1475F8CC1A543E4C00F99232 /* SysInfoDetailView.xib */; };
+		14B1517E1A53F6DD0012E078 /* WuYeNoticeXibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B1517C1A53F6DD0012E078 /* WuYeNoticeXibView.m */; };
+		14B1517F1A53F6DD0012E078 /* WuYeNoticeXibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B1517D1A53F6DD0012E078 /* WuYeNoticeXibView.xib */; };
 		14DCB4F81A527A870007B222 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DCB4F51A527A870007B222 /* libXG-SDK.a */; };
 /* End PBXBuildFile section */
 
@@ -970,6 +974,12 @@
 		141DE7E119D909C2000B15B0 /* BackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackButton.m; sourceTree = "<group>"; };
 		141DE7E219D909C2000B15B0 /* TTLicenseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTLicenseService.h; sourceTree = "<group>"; };
 		141DE7E319D909C2000B15B0 /* TTLicenseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTLicenseService.m; sourceTree = "<group>"; };
+		1475F8CA1A543E4C00F99232 /* SysInfoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysInfoDetailView.h; sourceTree = "<group>"; };
+		1475F8CB1A543E4C00F99232 /* SysInfoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SysInfoDetailView.m; sourceTree = "<group>"; };
+		1475F8CC1A543E4C00F99232 /* SysInfoDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SysInfoDetailView.xib; sourceTree = "<group>"; };
+		14B1517B1A53F6DD0012E078 /* WuYeNoticeXibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WuYeNoticeXibView.h; sourceTree = "<group>"; };
+		14B1517C1A53F6DD0012E078 /* WuYeNoticeXibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WuYeNoticeXibView.m; sourceTree = "<group>"; };
+		14B1517D1A53F6DD0012E078 /* WuYeNoticeXibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WuYeNoticeXibView.xib; sourceTree = "<group>"; };
 		14DCB4F51A527A870007B222 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
 		14DCB4F61A527A870007B222 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
 		14DCB4F71A527A870007B222 /* XGSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGSetting.h; sourceTree = "<group>"; };
@@ -1085,6 +1095,9 @@
 				041C87271A281FFA00449687 /* CommNoticCell.h */,
 				041C87281A281FFA00449687 /* CommNoticCell.m */,
 				041C87291A281FFA00449687 /* CommNoticCell.xib */,
+				14B1517B1A53F6DD0012E078 /* WuYeNoticeXibView.h */,
+				14B1517C1A53F6DD0012E078 /* WuYeNoticeXibView.m */,
+				14B1517D1A53F6DD0012E078 /* WuYeNoticeXibView.xib */,
 			);
 			path = WuYeNotice;
 			sourceTree = "<group>";
@@ -1287,6 +1300,9 @@
 				042E90341A1C21B500D6BC1B /* AreaMainViewController.m */,
 				0472EA811A1EE31D0059012D /* DetailViewController.h */,
 				0472EA821A1EE31D0059012D /* DetailViewController.m */,
+				1475F8CA1A543E4C00F99232 /* SysInfoDetailView.h */,
+				1475F8CB1A543E4C00F99232 /* SysInfoDetailView.m */,
+				1475F8CC1A543E4C00F99232 /* SysInfoDetailView.xib */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -2325,6 +2341,7 @@
 				042965851A26F5250067FD15 /* CommHotlineCell.xib in Resources */,
 				0475F8EE1A4906E3000396BF /* OwnerFieldCell.xib in Resources */,
 				04499CE01A23243700F557AE /* AddCommunity.storyboard in Resources */,
+				14B1517F1A53F6DD0012E078 /* WuYeNoticeXibView.xib in Resources */,
 				0459A56E1A2D4A11003BB88F /* RepairImgCell.xib in Resources */,
 				0461D8631A329A4F002B5FF2 /* RepairProgressCell.xib in Resources */,
 				040256A61A2B7369007AA304 /* BBSReplyView.xib in Resources */,
@@ -2348,6 +2365,7 @@
 				141DE69419D8F7B2000B15B0 /* BPushConfig.plist in Resources */,
 				041C872B1A281FFA00449687 /* CommNoticCell.xib in Resources */,
 				040256A21A2B7369007AA304 /* BBSTableView.xib in Resources */,
+				1475F8CE1A543E4C00F99232 /* SysInfoDetailView.xib in Resources */,
 				0429657D1A26D3880067FD15 /* CommHotlineView.xib in Resources */,
 				04432EAC1A1495A000FAB2DE /* StartView.storyboard in Resources */,
 			);
@@ -2430,6 +2448,7 @@
 				04F9CFC11A31A44700EBF4D3 /* RepairThumbCell.m in Sources */,
 				045CAF9D1A1ADA7000BCB55E /* MWTapDetectingImageView.m in Sources */,
 				041C87211A281A9400449687 /* WuYeNoticeDetailViewController.m in Sources */,
+				14B1517E1A53F6DD0012E078 /* WuYeNoticeXibView.m in Sources */,
 				0475F8ED1A4906E3000396BF /* OwnerFieldCell.m in Sources */,
 				141DE69D19D8F7B2000B15B0 /* EGOImageLoader.m in Sources */,
 				045CAFBF1A1ADA7000BCB55E /* UIView+WebCacheOperation.m in Sources */,
@@ -2569,6 +2588,7 @@
 				141DE7D619D908C8000B15B0 /* TTGuideView.m in Sources */,
 				04499CB41A22C82400F557AE /* HouseNumber.m in Sources */,
 				141DE6EC19D8F7B3000B15B0 /* VPImageCropperViewController.m in Sources */,
+				1475F8CD1A543E4C00F99232 /* SysInfoDetailView.m in Sources */,
 				141DE78719D90579000B15B0 /* UIDevice+Extensions.m in Sources */,
 				0440815D1A354E540085B404 /* MessageDetailViewController.m in Sources */,
 				045CAFA01A1ADA7000BCB55E /* DACircularProgressView.m in Sources */,

@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "CheckNetwork.h"
+#import "WuYeNoticeXibView.h"
+#import "BillsDetialViewController.h"
+#import "SysInfoDetailView.h"
 #import "IQKeyboardManager/KeyboardManager.framework/Headers/IQKeyboardManager.h"
 
 #import "XGPush.h"
@@ -245,6 +248,15 @@
     [XGPush handleReceiveNotification:userInfo successCallback:successBlock errorCallback:errorBlock completion:completion];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        if (alertView.tag == 1) {
+            [self pushNotificationHandle];
+        }
+    }
+}
+
 //推送通知处理
 - (void)pushNotificationHandle
 {
@@ -253,46 +265,34 @@
     //清除所有通知(包含本地通知)
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     NSString *type = [self.pushInfo  objectForKey:@"type"];
-//    if ([type isEqualToString:@"notice"] == YES) {
-//        NSString *pushDetailHtm = [NSString stringWithFormat:@"%@%@", api_base_url, [self.pushInfo  objectForKey:@"url"]];
-//        CommDetailView *detailView = [[CommDetailView alloc] initWithNibName:@"CommDetailView" bundle:nil];
-//        detailView.present = @"present";
-//        detailView.titleStr = @"物业通知";
-//        detailView.urlStr = pushDetailHtm;
-//        UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:detailView];
-//        [self.window.rootViewController presentViewController:detailViewNav animated:YES completion:^{
-//            _isForeground = NO;
-//        }];
-//    }
-//    else if ([type isEqualToString:@"express"] == YES)
-//    {
-//        ExpressView *expressView = [[ExpressView alloc] initWithNibName:@"ExpressView" bundle:nil];
-//        expressView.present = @"present";
-//        UINavigationController *noticeViewNav = [[UINavigationController alloc] initWithRootViewController:expressView];
-//        [self.window.rootViewController presentViewController:noticeViewNav animated:YES completion:^{
-//            _isForeground = NO;
-//        }];
-//    }
-//    else if ([type isEqualToString:@"repair"] == YES)
-//    {
-//        RepairDetailView *repairDetail = [[RepairDetailView alloc] initWithNibName:@"RepairDetailView" bundle:nil];
-//        repairDetail.present = @"present";
-//        repairDetail.repairWorkId = [self.pushInfo objectForKey:@"id"];
-//        UINavigationController *repairDetailNav = [[UINavigationController alloc] initWithRootViewController:repairDetail];
-//        [self.window.rootViewController presentViewController:repairDetailNav animated:YES completion:^{
-//            _isForeground = NO;
-//        }];
-//    }
-//    else if ([type isEqualToString:@"suit"] == YES)
-//    {
-//        SuitDetailView *suitDetail = [[SuitDetailView alloc] initWithNibName:@"SuitDetailView" bundle:nil];
-//        suitDetail.present = @"present";
-//        suitDetail.suitWorkId = [self.pushInfo objectForKey:@"id"];
-//        UINavigationController *suitDetailNav = [[UINavigationController alloc] initWithRootViewController:suitDetail];
-//        [self.window.rootViewController presentViewController:suitDetailNav animated:YES completion:^{
-//            _isForeground = NO;
-//        }];
-//    }
+    if ([type isEqualToString:@"01"] == YES) {
+        WuYeNoticeXibView* noticeDetailView = [[WuYeNoticeXibView alloc] initWithNibName:@"WuYeNoticeXibView" bundle:nil];
+        noticeDetailView.noticId = [self.pushInfo objectForKey:@"id"];
+        UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:noticeDetailView];
+        [self.window.rootViewController presentViewController:detailViewNav animated:YES completion:^{
+                        _isForeground = NO;
+                    }];
+    }
+    else if ([type isEqualToString:@"02"] == YES)
+    {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"UtilityBills" bundle:nil];
+        BillsDetialViewController* billDetailView = [storyBoard instantiateViewControllerWithIdentifier:@"BillsDetialViewController"];
+        billDetailView.billId = [self.pushInfo objectForKey:@"id"];
+        billDetailView.present = @"present";
+        UINavigationController *detailViewNav = [[UINavigationController alloc] initWithRootViewController:billDetailView];
+        [self.window.rootViewController presentViewController:detailViewNav animated:YES completion:^{
+            _isForeground = NO;
+        }];
+    }
+    else if ([type isEqualToString:@"03"] == YES)
+    {
+        SysInfoDetailView *sysinfoDetail = [[SysInfoDetailView alloc] initWithNibName:@"SysInfoDetailView" bundle:nil];
+        sysinfoDetail.infoId = [self.pushInfo objectForKey:@"id"];
+        UINavigationController *suitDetailNav = [[UINavigationController alloc] initWithRootViewController:sysinfoDetail];
+        [self.window.rootViewController presentViewController:suitDetailNav animated:YES completion:^{
+            _isForeground = NO;
+        }];
+    }
 }
 
 //信鸽

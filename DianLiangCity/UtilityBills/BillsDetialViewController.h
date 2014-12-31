@@ -10,7 +10,9 @@
 
 @interface BillsDetialViewController : UIViewController
 
-@property (strong, nonatomic) Bill *bill;
+@property (strong, nonatomic) NSString *present;
+
+@property (strong, nonatomic) NSString *billId;
 @property (strong, nonatomic) BillDetail *billDetails;
 @property (weak, nonatomic) IBOutlet UILabel *billTime;
 @property (weak, nonatomic) IBOutlet UILabel *billPrice;

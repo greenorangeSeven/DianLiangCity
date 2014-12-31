@@ -17,9 +17,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItems = [BackButton leftButton:self action:@selector(backAction:) image:@"back_bg"];
+    
+    if([self.present isEqualToString:@"present"] == YES)
+    {
+        self.title = @"";
+        
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+        titleLabel.font = [UIFont boldSystemFontOfSize:18];
+        titleLabel.text = @"账单详情";
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.textAlignment = UITextAlignmentCenter;
+        self.navigationItem.titleView = titleLabel;
+        
+        UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle: @"关闭" style:UIBarButtonItemStyleBordered target:self action:@selector(closeAction)];
+        leftBtn.tintColor = [UIColor whiteColor];
+        self.navigationItem.leftBarButtonItem = leftBtn;
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItems = [BackButton leftButton:self action:@selector(backAction:) image:@"back_bg"];
+    }
     
     [self initBillDetail];
+}
+
+- (void)closeAction
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)backAction:(id)sender
@@ -33,7 +60,7 @@
 - (void)initBillDetail
 {
     UserInfo *userInfo = [[UserModel Instance] getUserInfo];
-    NSString *url = [NSString stringWithFormat:@"%@%@?APPKey=%@&mobile=%@&id=%i",api_base_url,api_get_bill_info,api_key,userInfo.tel,self.bill.id];
+    NSString *url = [NSString stringWithFormat:@"%@%@?APPKey=%@&mobile=%@&id=%@",api_base_url,api_get_bill_info,api_key,userInfo.tel,self.billId];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
     request.delegate = self;
     [request setDidFailSelector:@selector(requestFailed:)];
