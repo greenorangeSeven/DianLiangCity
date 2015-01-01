@@ -25,6 +25,9 @@
 
     //检查网络是否存在 如果不存在 则弹出提示
     [UserModel Instance].isNetworkRunning = [CheckNetwork isExistenceNetwork];
+    
+    self.pushInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    
     UINavigationBar.appearance.barTintColor = UIColorRGB(226, 100, 0);
     self.isFirst = NO;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
