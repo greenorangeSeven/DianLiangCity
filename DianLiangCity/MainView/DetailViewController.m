@@ -27,6 +27,10 @@
     //    [self.webView setScalesPageToFit:YES];
     [self.webView sizeToFit];
     
+    if (!IS_IPHONE_5) {
+        self.webView.frame = CGRectMake(0, 0, self.webView.frame.size.width, self.view.frame.size.height);
+    }
+    
     NSString *html = nil;
     if(self.adv)
     {
@@ -104,12 +108,12 @@
     }
     
     self.view.backgroundColor = [Tool getBackgroundColor];
-    //适配iOS7uinavigationbar遮挡的问题
-    if(IS_IOS7)
-    {
+//    //适配iOS7uinavigationbar遮挡的问题
+//    if(IS_IOS7)
+//    {
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+//    }
     
 }
 
