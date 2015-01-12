@@ -114,7 +114,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"WuYeNoticeViewDetail" sender:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    int row = [indexPath row];
+    //点击“下面20条”
+    if (row >= [commNotics count]) {
+        //启动刷新
+        if (!isLoading) {
+            [self performSelector:@selector(reload:)];
+        }
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"WuYeNoticeViewDetail" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
