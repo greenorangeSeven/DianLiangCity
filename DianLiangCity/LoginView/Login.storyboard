@@ -190,8 +190,10 @@
                     <navigationItem key="navigationItem" title="忘记密码" id="MFv-Id-od2"/>
                     <connections>
                         <outlet property="codeTextField" destination="ltN-gS-dyd" id="yCh-60-x7U"/>
+                        <outlet property="obtainCodeBtn" destination="rzD-xk-xg1" id="pic-Fp-8PN"/>
                         <outlet property="phoneNumberTextField" destination="u6q-I8-T0N" id="ON7-Qo-D7J"/>
-                        <segue destination="sEN-G2-uWf" kind="push" id="2FP-hb-Tmq"/>
+                        <outlet property="validateBtn" destination="2AR-fe-cdl" id="Uky-G4-lDN"/>
+                        <segue destination="sEN-G2-uWf" kind="push" identifier="ResetPassword" id="2FP-hb-Tmq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2L-eE-QWx" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -115,6 +115,9 @@
 //社区验证接口
 #define api_valid @"valid"
 
+//重置密码
+#define api_resetPwd @"resetPwd"
+
 //社区简介接口
 #define api_get_community_info @"get_community_info"
 //社区风采,动态接口

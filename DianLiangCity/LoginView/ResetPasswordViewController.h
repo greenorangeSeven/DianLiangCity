@@ -9,6 +9,9 @@
 #import "TTBaseViewController.h"
 
 @interface ResetPasswordViewController : TTBaseViewController
+
+@property (copy, nonatomic) NSString *tel;
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *againPasswordTextField;
 
