@@ -16,9 +16,16 @@
 #import "RepairListViewController.h"
 #import "ProfileCenterViewController.h"
 #import "OwnerFieldViewController.h"
-
+#import "JSBadgeView.h"
 @interface AreaMainViewController () <UIAlertViewDelegate>
-
+{
+    //未读账单和通知个数
+    int billNoneSize;
+    int noticNoneSize;
+    MBProgressHUD *hud;
+    JSBadgeView *billBadgeView;
+    JSBadgeView *noticBadgeView;
+}
 @end
 
 @implementation AreaMainViewController
@@ -26,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, self.view.frame.size.height);
     if([[UserModel Instance] isLogin])
     {
@@ -33,6 +41,158 @@
     }
     self.navigationItem.leftBarButtonItems = [BackButton leftButton:self action:@selector(backAction:) image:@"back_bg"];
     self.navigationItem.title = self.commData.title;
+    [self updateNoneSize];
+}
+
+- (void) updateNoneSize
+{
+    [self updateMyBills];
+}
+
+- (void)updateMyBills
+{
+    if(self.commData.customer_pro == 1)
+    {
+        UserModel *userMode = [UserModel Instance];
+        UserInfo *userInfo = [userMode getUserInfo];
+        if(userMode.isNetworkRunning)
+        {
+            NSString *url;
+            
+            url = [NSString stringWithFormat:@"%@%@?APPKey=%@&mobile=%@",api_base_url,api_get_my_bills,api_key,userInfo.tel];
+            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+            request.delegate = self;
+            [request setDidFailSelector:@selector(requestFailed:)];
+            [request setDidFinishSelector:@selector(requestMyBillOK:)];
+            [request startAsynchronous];
+            [Tool showHUD:@"请稍后" andView:self.view andHUD:hud];
+        }
+    }
+    else
+    {
+        [self updateNoticNone];
+    }
+}
+
+- (void)requestBillFailed:(ASIHTTPRequest *)request
+{
+    [self updateNoticNone];
+}
+
+- (void)requestMyBillOK:(ASIHTTPRequest *)request
+{
+    
+    [request setUseCookiePersistence:YES];
+    MyBill *myBill = [Tool readJsonStrToMyBill:request.responseString];
+    EGOCache *cache = [EGOCache globalCache];
+    //获取上次记录的最新一条记录的id
+    NSString *bill_old_id = [cache stringForKey:@"billOldId"];
+    if(myBill && myBill.nopay.count > 0)
+    {
+        if(bill_old_id)
+        {
+            for(Bill *bill in myBill.nopay)
+            {
+                if(![bill_old_id isEqualToString:bill.id])
+                {
+                    ++billNoneSize;
+                }
+                else
+                {
+                    Bill *bills = myBill.nopay[0];
+                    [cache setString:bills.id forKey:@"billOldId"];
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Bill *bill = myBill.nopay[0];
+            [cache setString:bill.id forKey:@"billOldId"];
+            billNoneSize = myBill.nopay.count;
+        }
+    }
+    
+    if(billNoneSize > 0)
+    {
+        billBadgeView = [[JSBadgeView alloc] initWithParentView:self.billView alignment:JSBadgeViewAlignmentTopRight];
+        billBadgeView.badgeText = [NSString stringWithFormat:@"%d", billNoneSize];
+    }
+    
+    [self updateNoticNone];
+}
+
+- (void)updateNoticNone
+{
+    //如果是游客则不能进入
+    if(self.commData.customer_pro == 3)
+        return;
+    //如果有网络连接
+    if ([UserModel Instance].isNetworkRunning) {
+        
+        NSString *url;
+        //如果为1则是物业通告
+        url = [NSString stringWithFormat:@"%@%@?APPKey=%@&cid=%i&p=1",api_base_url,api_get_notice_list,api_key,self.commData.id];
+        
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+        request.delegate = self;
+        [request setDidFailSelector:@selector(requestFailed:)];
+        [request setDidFinishSelector:@selector(requestUpdateNoticOK:)];
+        request.hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [request startAsynchronous];
+    }
+}
+
+- (void)requestNoticFailed:(ASIHTTPRequest *)request
+{
+    if(hud)
+    {
+        [hud hide:YES];
+    }
+}
+
+- (void)requestUpdateNoticOK:(ASIHTTPRequest *)request
+{
+    if (hud)
+    {
+        [hud hide:YES];
+    }
+    NSMutableArray *newNews = [Tool readJsonStrToCommNotics:request.responseString];
+    
+    EGOCache *cache = [EGOCache globalCache];
+    //获取上次记录的最新一条记录的id
+    NSString *notic_old_id = [cache stringForKey:@"notic_old_id"];
+    if(newNews && newNews.count > 0)
+    {
+        if(notic_old_id)
+        {
+            for(CommNotic *notic in newNews)
+            {
+                if(![notic_old_id isEqualToString:notic.id])
+                {
+                    ++noticNoneSize;
+                }
+                else
+                {
+                    CommNotic *notics = newNews[0];
+                    [cache setString:notics.id forKey:@"notic_old_id"];
+                    break;
+                }
+            }
+        }
+        else
+        {
+            CommNotic *notic = newNews[0];
+            [cache setString:notic.id forKey:@"notic_old_id"];
+            noticNoneSize = newNews.count;
+        }
+    }
+    
+    if(noticNoneSize > 0)
+    {
+        noticBadgeView = [[JSBadgeView alloc] initWithParentView:self.noticView alignment:JSBadgeViewAlignmentTopRight];
+        noticBadgeView.badgeText = [NSString stringWithFormat:@"%d", noticNoneSize];
+    }
 }
 
 -(void)backAction:(id)sender
@@ -70,6 +230,8 @@
     }
     else
     {
+        if(billBadgeView)
+            [billBadgeView removeFromSuperview];
         UtilityBillsViewController *manager = [[UIStoryboard storyboardWithName:@"UtilityBills" bundle:nil] instantiateViewControllerWithIdentifier:@"UtilityBillsViewController"];
         manager.commData = self.commData;
         [self.navigationController pushViewController:manager animated:YES];
@@ -94,6 +256,8 @@
 #pragma mark 物业通告
 - (IBAction)propertyNoticAction:(UIButton *)sender
 {
+    if(noticBadgeView)
+        [noticBadgeView removeFromSuperview];
     //如果是游客则不能进入
     if(self.commData.customer_pro == 3)
     {

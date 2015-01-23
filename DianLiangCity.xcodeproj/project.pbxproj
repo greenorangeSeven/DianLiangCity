@@ -185,6 +185,7 @@
 		0475F8EE1A4906E3000396BF /* OwnerFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0475F8EC1A4906E3000396BF /* OwnerFieldCell.xib */; };
 		047EDB131A262FEC00BC7AB1 /* CommNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EDB111A262FEC00BC7AB1 /* CommNewCell.m */; };
 		047EDB141A262FEC00BC7AB1 /* CommNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047EDB121A262FEC00BC7AB1 /* CommNewCell.xib */; };
+		049484A51A721BDB001A6BE3 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049484A41A721BDB001A6BE3 /* JSBadgeView.m */; };
 		0499C0B41A3730460058946F /* PSTCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0499C0B31A3730460058946F /* PSTCollectionView.m */; };
 		0499C0B71A37ACDE0058946F /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0499C0B61A37ACDE0058946F /* Channel.m */; };
 		0499C0BA1A37B5EF0058946F /* OwnerScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 0499C0B91A37B5EF0058946F /* OwnerScope.m */; };
@@ -693,6 +694,8 @@
 		047EDB101A262FEC00BC7AB1 /* CommNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommNewCell.h; sourceTree = "<group>"; };
 		047EDB111A262FEC00BC7AB1 /* CommNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommNewCell.m; sourceTree = "<group>"; };
 		047EDB121A262FEC00BC7AB1 /* CommNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommNewCell.xib; sourceTree = "<group>"; };
+		049484A31A721BDB001A6BE3 /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		049484A41A721BDB001A6BE3 /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		0499C0B31A3730460058946F /* PSTCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCollectionView.m; sourceTree = "<group>"; };
 		0499C0B51A37ACDE0058946F /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		0499C0B61A37ACDE0058946F /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
@@ -1532,6 +1535,15 @@
 			name = AreaModel;
 			sourceTree = "<group>";
 		};
+		049484A21A721BDB001A6BE3 /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				049484A31A721BDB001A6BE3 /* JSBadgeView.h */,
+				049484A41A721BDB001A6BE3 /* JSBadgeView.m */,
+			);
+			path = JSBadgeView;
+			sourceTree = "<group>";
+		};
 		04DDFE2B1A2A2C9300A3CC9E /* UtilityBills */ = {
 			isa = PBXGroup;
 			children = (
@@ -1678,6 +1690,7 @@
 		141DE4F319D8F7B1000B15B0 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				049484A21A721BDB001A6BE3 /* JSBadgeView */,
 				14DCB4F41A527A870007B222 /* XGPush */,
 				043006F11A37EDD90081CB70 /* SNPopupView */,
 				043006EC1A37D3BB0081CB70 /* CCSegmentedControl */,
@@ -2581,6 +2594,7 @@
 				045CAFC61A1B234300BCB55E /* Community.m in Sources */,
 				141DE6EB19D8F7B3000B15B0 /* StrikeThroughLabel.m in Sources */,
 				04DDFE3C1A2A2C9300A3CC9E /* BillsDetialViewController.m in Sources */,
+				049484A51A721BDB001A6BE3 /* JSBadgeView.m in Sources */,
 				041DA7291A36EF6B00F14DDC /* FieldDetailViewController.m in Sources */,
 				141DE66E19D8F7B2000B15B0 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				141DE78619D90579000B15B0 /* UIButton+TitleImage.m in Sources */,

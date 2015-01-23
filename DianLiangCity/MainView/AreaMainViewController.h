@@ -20,5 +20,7 @@
 - (IBAction)buildAction:(UIButton *)sender;
 - (IBAction)governmentAction:(UIButton *)sender;
 - (IBAction)yellowAction:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIButton *billView;
+@property (weak, nonatomic) IBOutlet UIButton *noticView;
 
 @end

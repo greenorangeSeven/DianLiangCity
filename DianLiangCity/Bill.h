@@ -12,7 +12,7 @@
 /**
  * 账单ID
  */
-@property int id;
+@property (nonatomic, copy) NSString *id;
 
 /**
  * 账单名称
